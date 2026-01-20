@@ -1,2 +1,0 @@
-- Every internal time-related operation in my project should use UTC timestamps (including saving data to DB). Local time should only be used when showing information in logs and fronted pagesv to users
-- Speak Chinese to me, use English in my code and commit message
