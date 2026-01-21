@@ -1,23 +1,8 @@
-# HTTP 重定向到 HTTPS
+# HTTP 配置
+# 本地访问 (不重定向)
 server {
     listen 80;
-    server_name ${DOMAIN_NAME};
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-# HTTPS 配置
-server {
-    listen 443 ssl;
-    server_name ${DOMAIN_NAME};
-
-    ssl_certificate     /etc/nginx/certs/fullchain.pem;
-    ssl_certificate_key /etc/nginx/certs/privkey.pem;
-
-    ssl_protocols       TLSv1.2 TLSv1.3;
-    ssl_ciphers         HIGH:!aNULL:!MD5;
+    server_name localhost 127.0.0.1;
 
     # Backend API proxy
     location /api/ {
@@ -51,3 +36,88 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
+
+# 域名访问 (80 端口)
+server {
+    listen 80;
+    server_name ${DOMAIN_NAME};
+
+    # 如果开启了 HTTPS，则执行重定向
+    ${NGINX_HTTPS_ON}location / {
+    ${NGINX_HTTPS_ON}    return 301 https://$host$request_uri;
+    ${NGINX_HTTPS_ON}}
+
+    # 如果关闭了 HTTPS，则直接在此提供服务
+    ${NGINX_HTTPS_OFF}location /api/ {
+    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe_backend:8080;
+    ${NGINX_HTTPS_OFF}    proxy_set_header Host $host;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Real-IP $remote_addr;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-Proto $scheme;
+    ${NGINX_HTTPS_OFF}}
+
+    ${NGINX_HTTPS_OFF}location /ws/ {
+    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe_backend:8080;
+    ${NGINX_HTTPS_OFF}    proxy_http_version 1.1;
+    ${NGINX_HTTPS_OFF}    proxy_set_header Upgrade $http_upgrade;
+    ${NGINX_HTTPS_OFF}    proxy_set_header Connection "upgrade";
+    ${NGINX_HTTPS_OFF}    proxy_set_header Host $host;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Real-IP $remote_addr;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-Proto $scheme;
+    ${NGINX_HTTPS_OFF}    proxy_read_timeout 86400s;
+    ${NGINX_HTTPS_OFF}    proxy_send_timeout 86400s;
+    ${NGINX_HTTPS_OFF}}
+
+    ${NGINX_HTTPS_OFF}location / {
+    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe_fronted:80;
+    ${NGINX_HTTPS_OFF}    proxy_set_header Host $host;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Real-IP $remote_addr;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-Proto $scheme;
+    ${NGINX_HTTPS_OFF}}
+}
+
+# HTTPS 配置
+${NGINX_HTTPS_ON}server {
+${NGINX_HTTPS_ON}    listen 443 ssl;
+${NGINX_HTTPS_ON}    server_name ${DOMAIN_NAME};
+${NGINX_HTTPS_ON}
+${NGINX_HTTPS_ON}    ssl_certificate     /etc/nginx/certs/fullchain.pem;
+${NGINX_HTTPS_ON}    ssl_certificate_key /etc/nginx/certs/privkey.pem;
+${NGINX_HTTPS_ON}
+${NGINX_HTTPS_ON}    ssl_protocols       TLSv1.2 TLSv1.3;
+${NGINX_HTTPS_ON}    ssl_ciphers         HIGH:!aNULL:!MD5;
+${NGINX_HTTPS_ON}
+${NGINX_HTTPS_ON}    # Backend API proxy
+${NGINX_HTTPS_ON}    location /api/ {
+${NGINX_HTTPS_ON}        proxy_pass http://cafe_backend:8080;
+${NGINX_HTTPS_ON}        proxy_set_header Host $host;
+${NGINX_HTTPS_ON}        proxy_set_header X-Real-IP $remote_addr;
+${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-Proto $scheme;
+${NGINX_HTTPS_ON}    }
+${NGINX_HTTPS_ON}
+${NGINX_HTTPS_ON}    # Backend WebSocket proxy
+${NGINX_HTTPS_ON}    location /ws/ {
+${NGINX_HTTPS_ON}        proxy_pass http://cafe_backend:8080;
+${NGINX_HTTPS_ON}        proxy_http_version 1.1;
+${NGINX_HTTPS_ON}        proxy_set_header Upgrade $http_upgrade;
+${NGINX_HTTPS_ON}        proxy_set_header Connection "upgrade";
+${NGINX_HTTPS_ON}        proxy_set_header Host $host;
+${NGINX_HTTPS_ON}        proxy_set_header X-Real-IP $remote_addr;
+${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-Proto $scheme;
+${NGINX_HTTPS_ON}        proxy_read_timeout 86400s;
+${NGINX_HTTPS_ON}        proxy_send_timeout 86400s;
+${NGINX_HTTPS_ON}    }
+${NGINX_HTTPS_ON}
+${NGINX_HTTPS_ON}    # Frontend proxy
+${NGINX_HTTPS_ON}    location / {
+${NGINX_HTTPS_ON}        proxy_pass http://cafe_fronted:80;
+${NGINX_HTTPS_ON}        proxy_set_header Host $host;
+${NGINX_HTTPS_ON}        proxy_set_header X-Real-IP $remote_addr;
+${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-Proto $scheme;
+${NGINX_HTTPS_ON}    }
+${NGINX_HTTPS_ON}}

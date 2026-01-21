@@ -16,14 +16,25 @@ services:
       - cafe-net
 
   # Nginx 网关：统一入口
-  gateway:
+  cafe_gateway:
     image: nginx:stable-alpine
-    container_name: cafe_gateway
     ports:
       - "80:80"
       - "443:443"
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME:-localhost}
+      - ENABLE_HTTPS=${ENABLE_HTTPS:-false}
+    command: >
+      /bin/sh -c "
+        if [ \"$${ENABLE_HTTPS}\" = \"true\" ]; then
+          export NGINX_HTTPS_ON='';
+          export NGINX_HTTPS_OFF='#';
+        else
+          export NGINX_HTTPS_ON='#';
+          export NGINX_HTTPS_OFF='';
+        fi;
+        exec /docker-entrypoint.sh nginx -g 'daemon off;'
+      "
     volumes:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
       - ./certs:/etc/nginx/certs:ro
