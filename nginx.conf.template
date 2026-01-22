@@ -1,8 +1,8 @@
 # HTTP 配置
-# 本地访问 (不重定向)
+# 本地或 IP 访问 (不重定向)
 server {
-    listen 80;
-    server_name localhost 127.0.0.1;
+    listen 80 default_server;
+    server_name _;
 
     # Backend API proxy
     location /api/ {
