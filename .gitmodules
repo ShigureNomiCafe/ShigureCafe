@@ -1,5 +1,5 @@
-[submodule "ShigureCafeBackened"]
-	path = ShigureCafeBackened
+[submodule "ShigureCafeBackend"]
+	path = ShigureCafeBackend
 	url = https://github.com/ShigureNomiCafe/ShigureCafeBackened.git
 [submodule "ShigureCafeFronted"]
 	path = ShigureCafeFronted

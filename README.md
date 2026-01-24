@@ -5,7 +5,7 @@ A robust, secure, and modern social and management system specifically designed 
 ## 🚀 Project Overview
 
 ShigureCafe is a full-stack solution consisting of four main components:
-- **[Backend](./ShigureCafeBackened)**: Spring Boot 4 + Java 25 service handling auth, security, and game integration.
+- **[Backend](./ShigureCafeBackend)**: Spring Boot 4 + Java 25 service handling auth, security, and game integration.
 - **[Frontend](./ShigureCafeFronted)**: Vue 3 + Tailwind CSS 4 dashboard for users and administrators.
 - **[Minecraft Plugin](./ShigureCafePlugin)**: MCDReforged plugin for real-time game-to-web synchronization.
 - **Gateway**: Nginx-based reverse proxy with automated HTTPS/SSL support.
@@ -74,7 +74,7 @@ The gateway will be available at your configured `DOMAIN_NAME` (defaulting to `h
 
 ```text
 ShigureCafe/
-├── ShigureCafeBackened/    # Java Spring Boot backend
+├── ShigureCafeBackend/    # Java Spring Boot backend
 ├── ShigureCafeFronted/     # Vue.js frontend application
 ├── ShigureCafePlugin/      # MCDR Minecraft plugin
 ├── certs/                  # SSL certificates (git-ignored)

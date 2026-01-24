@@ -1,11 +1,11 @@
 include:
-  - path: ShigureCafeBackened/docker-compose.yml
+  - path: ShigureCafeBackend/docker-compose.yml
   - path: ShigureCafeFronted/docker-compose.yml
 
 services:
   # 覆盖后端服务：确保它在网络中可被 gateway 访问
   # 注意：这里不需要写 ports，因为 include 的文件里已经写了。
-  # 如果要彻底隐藏 8080，需要修改 ShigureCafeBackened/docker-compose.yml
+  # 如果要彻底隐藏 8080，需要修改 ShigureCafeBackend/docker-compose.yml
   cafe_backend:
     networks:
       - cafe-net
@@ -46,4 +46,4 @@ services:
     networks:
       - cafe-net
 
-# 注意：cafe-net 已经在 ShigureCafeBackened/docker-compose.yml 中定义
+# 注意：cafe-net 已经在 ShigureCafeBackend/docker-compose.yml 中定义
