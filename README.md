@@ -1,4 +1,4 @@
-# ShigureCafe
+# ShigureCafe ![Version](https://img.shields.io/badge/version-1.1.1-blue)
 
 A robust, secure, and modern social and management system specifically designed for Minecraft communities. It features real-time chat synchronization, automated whitelist management, and a premium user-audit workflow.
 
@@ -14,7 +14,7 @@ ShigureCafe is a full-stack solution consisting of four main components:
 
 ## ✨ Key Features
 
-- **🛡️ Advanced Security**: Stateless JWT authentication, MFA (Email & TOTP), and rate limiting.
+- **🛡️ Advanced Security**: Stateless JWT authentication, MFA (Email & TOTP), Cloudflare Turnstile CAPTCHA, and rate limiting.
 - **🎮 Minecraft Integration**: 
   - **Account Binding**: Link Minecraft accounts via Microsoft OAuth2.
   - **Real-time Chat**: Bidirectional sync between game chat and web interface.
