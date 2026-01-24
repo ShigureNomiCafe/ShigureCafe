@@ -1,6 +1,6 @@
 [submodule "ShigureCafeBackend"]
 	path = ShigureCafeBackend
-	url = https://github.com/ShigureNomiCafe/ShigureCafeBackened.git
+	url = https://github.com/ShigureNomiCafe/ShigureCafeBackend.git
 [submodule "ShigureCafeFronted"]
 	path = ShigureCafeFronted
 	url = https://github.com/ShigureNomiCafe/ShigureCafeFronted.git
