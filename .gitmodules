@@ -7,3 +7,6 @@
 [submodule "ShigureCafePlugin"]
 	path = ShigureCafePlugin
 	url = https://github.com/ShigureNomiCafe/ShigureCafePlugin.git
+[submodule "ShigureCafeBot"]
+	path = ShigureCafeBot
+	url = https://github.com/ShigureNomiCafe/ShigureCafeBot.git
