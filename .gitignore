@@ -3,3 +3,7 @@ GEMINI.md
 .env.test
 *.log
 certs/
+
+# Mihomo runtime files
+mihomo/*
+!mihomo/.gitkeep

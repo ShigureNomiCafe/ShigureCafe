@@ -5,11 +5,10 @@ include:
 
 services:
   # Mihomo Proxy Service
-  mihomo:
+  cafe_mihomo:
     image: metacubex/mihomo:latest
-    container_name: cafe_mihomo
     volumes:
-      - ./mihomo:/root/.config/mihomo:ro
+      - ./mihomo:/root/.config/mihomo
     restart: unless-stopped
     networks:
       - cafe-net
