@@ -9,6 +9,9 @@ services:
     image: metacubex/mihomo:latest
     volumes:
       - ./mihomo:/root/.config/mihomo
+    expose:
+      - "7890"
+      - "9090"
     restart: unless-stopped
     networks:
       - cafe-net
