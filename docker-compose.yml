@@ -1,6 +1,7 @@
 include:
   - path: ShigureCafeBackend/docker-compose.yml
   - path: ShigureCafeFronted/docker-compose.yml
+  - path: ShigureCafeBot/docker-compose.yml
 
 services:
   # 覆盖后端服务：确保它在网络中可被 gateway 访问
