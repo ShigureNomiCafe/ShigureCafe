@@ -4,6 +4,16 @@ include:
   - path: ShigureCafeBot/docker-compose.yml
 
 services:
+  # Mihomo Proxy Service
+  mihomo:
+    image: metacubex/mihomo:latest
+    container_name: cafe_mihomo
+    volumes:
+      - ./mihomo:/root/.config/mihomo:ro
+    restart: unless-stopped
+    networks:
+      - cafe-net
+
   # 覆盖后端服务：确保它在网络中可被 gateway 访问
   # 注意：这里不需要写 ports，因为 include 的文件里已经写了。
   # 如果要彻底隐藏 8080，需要修改 ShigureCafeBackend/docker-compose.yml
