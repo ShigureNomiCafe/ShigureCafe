@@ -1,12 +1,13 @@
-# ShigureCafe ![Version](https://img.shields.io/badge/version-1.1.1-blue)
+# ShigureCafe ![Version](https://img.shields.io/badge/version-1.2.0-blue)
 
 A robust, secure, and modern social and management system specifically designed for Minecraft communities. It features real-time chat synchronization, automated whitelist management, and a premium user-audit workflow.
 
 ## 🚀 Project Overview
 
-ShigureCafe is a full-stack solution consisting of four main components:
+ShigureCafe is a full-stack solution consisting of five main components:
 - **[Backend](./ShigureCafeBackend)**: Spring Boot 4 + Java 25 service handling auth, security, and game integration.
 - **[Frontend](./ShigureCafeFronted)**: Vue 3 + Tailwind CSS 4 dashboard for users and administrators.
+- **[Telegram Bot](./ShigureCafeBot)**: Python-based bot for user verification and community management.
 - **[Minecraft Plugin](./ShigureCafePlugin)**: MCDReforged plugin for real-time game-to-web synchronization.
 - **Gateway**: Nginx-based reverse proxy with automated HTTPS/SSL support.
 
@@ -14,7 +15,8 @@ ShigureCafe is a full-stack solution consisting of four main components:
 
 ## ✨ Key Features
 
-- **🛡️ Advanced Security**: Stateless JWT authentication, MFA (Email & TOTP), Cloudflare Turnstile CAPTCHA, and rate limiting.
+- **🛡️ Advanced Security**: Stateless JWT authentication, MFA (Email & TOTP), Cloudflare Turnstile CAPTCHA, and Bucket4j rate limiting.
+- **🤖 Telegram Integration**: Automated user verification and one-time invite link generation for private groups.
 - **🎮 Minecraft Integration**: 
   - **Account Binding**: Link Minecraft accounts via Microsoft OAuth2.
   - **Real-time Chat**: Bidirectional sync between game chat and web interface.
@@ -31,8 +33,9 @@ ShigureCafe is a full-stack solution consisting of four main components:
 
 | Layer | Technologies |
 | :--- | :--- |
-| **Backend** | Java 25, Spring Boot 4.0, Spring Security, MariaDB, Redis |
+| **Backend** | Java 25, Spring Boot 4.0, Spring Security, MariaDB, Redis, Bucket4j |
 | **Frontend** | Vue 3.5, Vite 7, TypeScript, Tailwind CSS 4, Pinia |
+| **Telegram Bot** | Python 3.14, python-telegram-bot |
 | **Plugin** | Python, MCDReforged, WebSockets |
 | **Infrastructure** | Docker, Nginx (Gateway), S3 Storage |
 
@@ -76,6 +79,7 @@ The gateway will be available at your configured `DOMAIN_NAME` (defaulting to `h
 ShigureCafe/
 ├── ShigureCafeBackend/    # Java Spring Boot backend
 ├── ShigureCafeFronted/     # Vue.js frontend application
+├── ShigureCafeBot/         # Telegram verification bot
 ├── ShigureCafePlugin/      # MCDR Minecraft plugin
 ├── certs/                  # SSL certificates (git-ignored)
 ├── nginx.conf.template     # Nginx template with ENV support
