@@ -21,13 +21,6 @@ services:
     networks:
       - cafe-net
 
-  # ... (rest of services)
-
-networks:
-  cafe-net:
-    driver: bridge
-  # 注意：这里不需要写 ports，因为 include 的文件里已经写了。
-  # 如果要彻底隐藏 8080，需要修改 ShigureCafeBackend/docker-compose.yml
   cafe_backend:
     networks:
       - cafe-net
@@ -68,4 +61,6 @@ networks:
     networks:
       - cafe-net
 
-# 注意：cafe-net 已经在 ShigureCafeBackend/docker-compose.yml 中定义
+networks:
+  cafe-net:
+    driver: bridge
