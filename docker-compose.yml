@@ -4,19 +4,25 @@ include:
   - path: ShigureCafeBot/docker-compose.yml
 
 services:
-  # Mihomo Proxy Service
+  # ShellCrash Proxy Service (Mihomo Core)
+  # Initialization: docker exec -it shellcrash crash
+  # Note: Running in unprivileged mode to provide proxy ports only.
   cafe_mihomo:
-    image: metacubex/mihomo:latest
+    image: juewuy/shellcrash:latest
     volumes:
-      - ./mihomo:/root/.config/mihomo
+      - cafe_mihomo_data:/etc/ShellCrash
+    ports:
+      - "${MIHOMO_CONTROL_PORT:-9999}:9999"
     expose:
       - "7890"
-      - "9090"
     healthcheck:
-      test: ["CMD-SHELL", "nc -z 127.0.0.1 7890 || exit 1"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      # Check if the dashboard UI is accessible via GET request
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:9999/ui/pac || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+      start_interval: 5s
     restart: unless-stopped
     networks:
       - cafe-net
@@ -64,3 +70,6 @@ services:
 networks:
   cafe-net:
     driver: bridge
+
+volumes:
+  cafe_mihomo_data:
