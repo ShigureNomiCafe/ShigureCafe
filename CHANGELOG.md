@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.3.0] - 2026-02-08
+
+### Added
+- **Backend**: New token validation endpoint to support enhanced session management.
+- **Frontend**: Session validation logic and automatic logout mechanism for improved security.
+
+### Changed
+- **Bot Integration**: 
+  - Restructured `ShigureCafeBot` into a modular package with a clear `main.py` entry point.
+  - Simplified proxy configuration in the bot's application builder.
+- **Repository Cleanup**: Removed deprecated `mihomo` directory from the root repository as part of the transition to `ShellCrash`.
+- **Submodules**: Updated all submodule pointers to their latest stable versions.
+
+---
+
 ## [v1.2.1] - 2026-02-02
 
 ### Changed
