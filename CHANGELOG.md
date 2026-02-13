@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.3.2] - 2026-02-13
+
+### Added
+- **Backend**: Implemented centralized log storage system with real-time polling and cursor-based pagination.
+- **Frontend**: Added a real-time system log management dashboard with a terminal-like UI and infinite scroll.
+
+### Changed
+- **Backend**: Refactored the logging system for better performance and maintainability.
+- **Frontend**: Polished the log terminal UI and improved mobile responsiveness.
+- **Submodules**: Updated `ShigureCafeBackend` to v1.3.0 and `ShigureCafeFronted` to v1.2.0.
+
+---
+
 ## [v1.3.1] - 2026-02-09
 
 ### Fixed

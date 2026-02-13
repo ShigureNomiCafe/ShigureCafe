@@ -1,4 +1,4 @@
-# ShigureCafe ![Version](https://img.shields.io/badge/version-1.3.0-blue)
+# ShigureCafe ![Version](https://img.shields.io/badge/version-1.3.2-blue)
 
 A robust, secure, and modern social and management system specifically designed for Minecraft communities. It features real-time chat synchronization, automated whitelist management, and a premium user-audit workflow.
 
