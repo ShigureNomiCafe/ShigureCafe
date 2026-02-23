@@ -7,10 +7,10 @@ services:
   # ShellCrash Proxy Service (Mihomo Core)
   # Initialization: docker exec -it shellcrash crash
   # Note: Running in unprivileged mode to provide proxy ports only.
-  cafe_mihomo:
+  cafe-mihomo:
     image: juewuy/shellcrash:latest
     volumes:
-      - cafe_mihomo_data:/etc/ShellCrash
+      - cafe-mihomo-data:/etc/ShellCrash
     ports:
       - "${MIHOMO_CONTROL_PORT:-9999}:9999"
     expose:
@@ -27,17 +27,17 @@ services:
     networks:
       - cafe-net
 
-  cafe_backend:
+  cafe-backend:
     networks:
       - cafe-net
 
   # 覆盖前端服务：加入后端网络并确保它在网络中可被 gateway 访问
-  cafe_fronted:
+  cafe-fronted:
     networks:
       - cafe-net
 
   # Nginx 网关：统一入口
-  cafe_gateway:
+  cafe-gateway:
     image: nginx:stable-alpine
     ports:
       - "80:80"
@@ -60,9 +60,9 @@ services:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
       - ./certs:/etc/nginx/certs:ro
     depends_on:
-      cafe_backend:
+      cafe-backend:
         condition: service_started
-      cafe_fronted:
+      cafe-fronted:
         condition: service_started
     networks:
       - cafe-net
@@ -72,4 +72,4 @@ networks:
     driver: bridge
 
 volumes:
-  cafe_mihomo_data:
+  cafe-mihomo-data:

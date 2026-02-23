@@ -6,7 +6,7 @@ server {
 
     # Backend API proxy
     location /api/ {
-        proxy_pass http://cafe_backend:8080;
+        proxy_pass http://cafe-backend:8080;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -15,7 +15,7 @@ server {
 
     # Backend WebSocket proxy
     location /ws/ {
-        proxy_pass http://cafe_backend:8080;
+        proxy_pass http://cafe-backend:8080;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -29,7 +29,7 @@ server {
 
     # Frontend proxy
     location / {
-        proxy_pass http://cafe_fronted:80;
+        proxy_pass http://cafe-fronted:80;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -49,7 +49,7 @@ server {
 
     # 如果关闭了 HTTPS，则直接在此提供服务
     ${NGINX_HTTPS_OFF}location /api/ {
-    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe_backend:8080;
+    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe-backend:8080;
     ${NGINX_HTTPS_OFF}    proxy_set_header Host $host;
     ${NGINX_HTTPS_OFF}    proxy_set_header X-Real-IP $remote_addr;
     ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -57,7 +57,7 @@ server {
     ${NGINX_HTTPS_OFF}}
 
     ${NGINX_HTTPS_OFF}location /ws/ {
-    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe_backend:8080;
+    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe-backend:8080;
     ${NGINX_HTTPS_OFF}    proxy_http_version 1.1;
     ${NGINX_HTTPS_OFF}    proxy_set_header Upgrade $http_upgrade;
     ${NGINX_HTTPS_OFF}    proxy_set_header Connection "upgrade";
@@ -70,7 +70,7 @@ server {
     ${NGINX_HTTPS_OFF}}
 
     ${NGINX_HTTPS_OFF}location / {
-    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe_fronted:80;
+    ${NGINX_HTTPS_OFF}    proxy_pass http://cafe-fronted:80;
     ${NGINX_HTTPS_OFF}    proxy_set_header Host $host;
     ${NGINX_HTTPS_OFF}    proxy_set_header X-Real-IP $remote_addr;
     ${NGINX_HTTPS_OFF}    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -91,7 +91,7 @@ ${NGINX_HTTPS_ON}    ssl_ciphers         HIGH:!aNULL:!MD5;
 ${NGINX_HTTPS_ON}
 ${NGINX_HTTPS_ON}    # Backend API proxy
 ${NGINX_HTTPS_ON}    location /api/ {
-${NGINX_HTTPS_ON}        proxy_pass http://cafe_backend:8080;
+${NGINX_HTTPS_ON}        proxy_pass http://cafe-backend:8080;
 ${NGINX_HTTPS_ON}        proxy_set_header Host $host;
 ${NGINX_HTTPS_ON}        proxy_set_header X-Real-IP $remote_addr;
 ${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -100,7 +100,7 @@ ${NGINX_HTTPS_ON}    }
 ${NGINX_HTTPS_ON}
 ${NGINX_HTTPS_ON}    # Backend WebSocket proxy
 ${NGINX_HTTPS_ON}    location /ws/ {
-${NGINX_HTTPS_ON}        proxy_pass http://cafe_backend:8080;
+${NGINX_HTTPS_ON}        proxy_pass http://cafe-backend:8080;
 ${NGINX_HTTPS_ON}        proxy_http_version 1.1;
 ${NGINX_HTTPS_ON}        proxy_set_header Upgrade $http_upgrade;
 ${NGINX_HTTPS_ON}        proxy_set_header Connection "upgrade";
@@ -114,7 +114,7 @@ ${NGINX_HTTPS_ON}    }
 ${NGINX_HTTPS_ON}
 ${NGINX_HTTPS_ON}    # Frontend proxy
 ${NGINX_HTTPS_ON}    location / {
-${NGINX_HTTPS_ON}        proxy_pass http://cafe_fronted:80;
+${NGINX_HTTPS_ON}        proxy_pass http://cafe-fronted:80;
 ${NGINX_HTTPS_ON}        proxy_set_header Host $host;
 ${NGINX_HTTPS_ON}        proxy_set_header X-Real-IP $remote_addr;
 ${NGINX_HTTPS_ON}        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
